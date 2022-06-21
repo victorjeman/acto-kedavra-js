@@ -1,18 +1,41 @@
 import ReactDom from 'react-dom'
 import styled from 'styled-components'
+import { useEffect, useState } from 'react'
 
 import { ReactComponent as IconClose } from 'assets/images/close.svg'
 
+const CODE_ESCAPE = 'Escape'
+
 export const Modal = ({ title, children, closeModal }) => {
+  const [bottom, setBottom] = useState('-100%')
+
   const handleCloseModal = () => {
-    closeModal()
+    setBottom('-100%')
+
+    window.setTimeout(() => {
+      closeModal()
+    }, 400)
   }
+
+  const closeOnEscape = (event) => {
+    if (event.code === CODE_ESCAPE) handleCloseModal()
+  }
+
+  useEffect(() => {
+    window.addEventListener('keydown', closeOnEscape)
+    setBottom('0')
+
+    return () => {
+      window.removeEventListener('keydown', closeOnEscape)
+    }
+    //eslint-disable-next-line
+  }, [])
 
   return ReactDom.createPortal(
     <>
       <Overlay onClick={handleCloseModal} />
 
-      <Container>
+      <Container bottom={bottom}>
         <Title>{title}</Title>
         <Content>{children}</Content>
 
@@ -45,7 +68,7 @@ const Container = styled.div`
   box-shadow: 0px -4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 24px 24px 0px 0px;
   transition: 0.7s ease-in-out;
-  bottom: 0;
+  ${({ bottom }) => `bottom: ${bottom};`}
 `
 
 const Title = styled.h2`
