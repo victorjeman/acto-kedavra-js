@@ -2,3 +2,11 @@ body {
   font-family: 'Poppins', sans-serif;
   background-color: #f7f7fc;
 }
+
+button:hover {
+  cursor: pointer;
+}
+
+*:focus {
+  outline: 2px solid #6308f7;
+}
