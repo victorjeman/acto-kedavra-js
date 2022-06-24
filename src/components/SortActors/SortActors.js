@@ -11,7 +11,7 @@ export const SortActors = () => {
   return (
     <SortActorsStyled>
       {showModal && (
-        <Modal title='Select type of sort' closeModal={closeModal}>
+        <Modal title='Select type of sort' onClose={closeModal}>
           <SomeContent />
         </Modal>
       )}
