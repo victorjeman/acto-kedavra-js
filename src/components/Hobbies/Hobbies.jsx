@@ -4,9 +4,11 @@ import { nanoid } from 'nanoid'
 import { Hobby } from 'components/Hobby/Hobby'
 
 export const Hobbies = ({ hobbies, ...rest }) => {
+  const hobbiesLocal = window.Array.isArray(hobbies) ? hobbies : []
+
   return (
     <HobbiesStyled {...rest}>
-      {hobbies.map((hobby) => (
+      {hobbiesLocal.map((hobby) => (
         <HobbiesItemStyled key={nanoid()}>
           <Hobby name={hobby} />
         </HobbiesItemStyled>

@@ -11,8 +11,14 @@ export const ActorForm = (props) => {
   const [hobbies, setHobbies] = useState(props.hobbies || '')
   const [description, setDescrition] = useState(props.description || '')
 
+  const submit = (event) => {
+    event.preventDefault()
+    event.stopPropagation()
+    handleSubmit({ name, occupation, hobbies, description })
+  }
+
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form onSubmit={submit}>
       <Group>
         <Label>Name</Label>
         <Input type='text' value={name} onChange={(event) => setName(event.target.value)} />
