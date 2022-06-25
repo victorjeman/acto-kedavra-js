@@ -5,7 +5,7 @@ import { ActorForm } from 'components/ActorForm/ActorForm'
 import { Button } from 'components/Button/Button'
 import { Modal } from 'components/Modal/Modal'
 
-export const AddActor = () => {
+export const AddActor = ({ handleAddActor }) => {
   const [showForm, setShowForm] = useState(false)
 
   return (
@@ -15,7 +15,7 @@ export const AddActor = () => {
       </Button>
       {showForm && (
         <Modal title='Add new actor' onClose={() => setShowForm(false)}>
-          <ActorForm />
+          <ActorForm handleSubmit={handleAddActor} />
         </Modal>
       )}
     </AddActorStyled>
