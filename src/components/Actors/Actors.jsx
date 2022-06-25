@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 import { Actor } from 'components/Actor/Actor'
 
-export const Actors = ({ actors }) => {
+export const Actors = ({ actors, addActor }) => {
   return (
     <ActorsStyled>
       {actors.map((actor) => (
@@ -19,8 +19,8 @@ const ActorsStyled = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  padding: 10px;
-  max-width: 400px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   margin-right: auto;
   margin-left: auto;
 `

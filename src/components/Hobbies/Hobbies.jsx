@@ -3,9 +3,9 @@ import { nanoid } from 'nanoid'
 
 import { Hobby } from 'components/Hobby/Hobby'
 
-export const Hobbies = ({ clasName, hobbies }) => {
+export const Hobbies = ({ hobbies, ...rest }) => {
   return (
-    <HobbiesStyled clasName={clasName}>
+    <HobbiesStyled {...rest}>
       {hobbies.map((hobby) => (
         <HobbiesItemStyled key={nanoid()}>
           <Hobby name={hobby} />

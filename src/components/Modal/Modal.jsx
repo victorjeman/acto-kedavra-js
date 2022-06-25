@@ -6,19 +6,19 @@ import { ReactComponent as IconClose } from 'assets/images/close.svg'
 
 const CODE_ESCAPE = 'Escape'
 
-export const Modal = ({ title, children, closeModal }) => {
+export const Modal = ({ title, children, onClose }) => {
   const [bottom, setBottom] = useState('-100%')
 
-  const handleCloseModal = () => {
+  const handleClose = () => {
     setBottom('-100%')
 
     window.setTimeout(() => {
-      closeModal()
+      onClose()
     }, 400)
   }
 
   const closeOnEscape = (event) => {
-    if (event.code === CODE_ESCAPE) handleCloseModal()
+    if (event.code === CODE_ESCAPE) handleClose()
   }
 
   useEffect(() => {
@@ -33,13 +33,13 @@ export const Modal = ({ title, children, closeModal }) => {
 
   return ReactDom.createPortal(
     <>
-      <Overlay onClick={handleCloseModal} />
+      <Overlay onClick={handleClose} />
 
       <Container bottom={bottom}>
         <Title>{title}</Title>
         <Content>{children}</Content>
 
-        <Close onClick={handleCloseModal}>
+        <Close onClick={handleClose}>
           <IconClose />
         </Close>
       </Container>
@@ -62,7 +62,7 @@ const Container = styled.div`
   filter: drop-shadow(0px -4px 8px rgba(0, 0, 0, 0.1));
   position: fixed;
   z-index: 2;
-  padding: 50px 20px;
+  padding: 50px 20px 25px 20px;
   width: 100%;
   background: #ffffff;
   box-shadow: 0px -4px 8px rgba(0, 0, 0, 0.1);
@@ -92,6 +92,4 @@ const Close = styled.button`
   }
 `
 
-const Content = styled.div`
-  /* padding: 20px; */
-`
+const Content = styled.div``
