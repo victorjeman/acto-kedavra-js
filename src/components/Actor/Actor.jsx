@@ -1,14 +1,29 @@
 import styled from 'styled-components'
 import { useState } from 'react'
 
+import { ACTOR_FORM_EDIT } from 'settings/settings'
+
 import { ActorForm } from 'components/ActorForm/ActorForm'
 import { ActorReadMore } from 'components/ActorReadMore/ActorReadMore'
 import { Button } from 'components/Button/Button'
 import { Hobbies } from 'components/Hobbies/Hobbies'
 import { Modal } from 'components/Modal/Modal'
 
-export const Actor = ({ image, name, occupation, hobbies, description }) => {
-  const [showForm, setShowForm] = useState(false)
+import { ReactComponent as IconClose } from 'assets/images/close.svg'
+
+export const Actor = ({
+  actor,
+  onActorUpdate: handleActorUpdate,
+  onActorDelete: handleActorDelete,
+}) => {
+  const { image, name, occupation, hobbies, description } = actor
+
+  const [showEditModal, setShowEditModal] = useState(false)
+
+  const handleModalShow = () => setShowEditModal(true)
+  const handleModalClose = () => setShowEditModal(false)
+
+  const handleActorDeleteLocal = () => handleActorDelete(actor)
 
   return (
     <ActorStyled>
@@ -23,13 +38,22 @@ export const Actor = ({ image, name, occupation, hobbies, description }) => {
 
         <ActorReadMore text={description} />
 
-        <Edit type='secondary' size='small' onClick={() => setShowForm(true)}>
+        <Edit type='secondary' size='small' onClick={handleModalShow}>
           Edit
         </Edit>
 
-        {showForm && (
-          <Modal onClose={setShowForm}>
-            <ActorForm image={image} name={name} occupation={occupation} hobbies={hobbies} description={description} />
+        <Delete onClick={handleActorDeleteLocal}>
+          <IconCloseStyled />
+        </Delete>
+
+        {showEditModal && (
+          <Modal onClose={handleModalClose}>
+            <ActorForm
+              {...actor}
+              onSubmit={handleActorUpdate}
+              onModalClose={handleModalClose}
+              type={ACTOR_FORM_EDIT}
+            />
           </Modal>
         )}
       </ContentStyled>
@@ -40,7 +64,7 @@ export const Actor = ({ image, name, occupation, hobbies, description }) => {
 export const ActorStyled = styled.div`
   background: #ffffff;
   border-radius: 10px;
-  overflow: hidden;
+  position: relative;
   filter: drop-shadow(0px 3px 6px rgba(0, 0, 0, 0.1));
 `
 
@@ -69,6 +93,30 @@ const OcupationStyled = styled.p`
   font-weight: 300;
   line-height: 1.2;
   margin-bottom: 4px;
+`
+
+const Delete = styled.button`
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+
+  &:focus {
+    outline: 3px dashed #6308f7;
+    outline-offset: 3px;
+  }
+`
+
+const IconCloseStyled = styled(IconClose)`
+  width: 14px;
+  height: 14px;
 `
 
 const ActorHobbies = styled(Hobbies)`

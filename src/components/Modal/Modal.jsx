@@ -1,45 +1,42 @@
+import { useEffect, useState } from 'react'
 import ReactDom from 'react-dom'
 import styled from 'styled-components'
-import { useEffect, useState } from 'react'
+
+import { ESCAPE_BTN_CODE, WAIT_FOR_CSS_ANIMATION_TO_END } from 'settings/settings'
 
 import { ReactComponent as IconClose } from 'assets/images/close.svg'
 
-const CODE_ESCAPE = 'Escape'
+export const Modal = ({ title, children, onClose: handleClose }) => {
+  const [cssPropBottom, setCSSPropBottom] = useState('-100%')
 
-export const Modal = ({ title, children, onClose }) => {
-  const [bottom, setBottom] = useState('-100%')
-
-  const handleClose = () => {
-    setBottom('-100%')
-
-    window.setTimeout(() => {
-      onClose()
-    }, 400)
+  const handleCloseLocal = () => {
+    setCSSPropBottom('-100%')
+    window.setTimeout(() => handleClose(), WAIT_FOR_CSS_ANIMATION_TO_END)
   }
 
-  const closeOnEscape = (event) => {
-    if (event.code === CODE_ESCAPE) handleClose()
+  const checkIfEscapeIsDown = (event) => event.code === ESCAPE_BTN_CODE
+
+  const handleCloseEscape = (event) => {
+    if (checkIfEscapeIsDown(event)) handleCloseLocal()
   }
 
   useEffect(() => {
-    window.addEventListener('keydown', closeOnEscape)
-    setBottom('0')
+    window.addEventListener('keydown', handleCloseEscape)
+    setCSSPropBottom('0')
 
-    return () => {
-      window.removeEventListener('keydown', closeOnEscape)
-    }
+    return () => window.removeEventListener('keydown', handleCloseEscape)
     //eslint-disable-next-line
   }, [])
 
   return ReactDom.createPortal(
     <>
-      <Overlay onClick={handleClose} />
+      <Overlay onClick={handleCloseLocal} />
 
-      <Container bottom={bottom}>
+      <Container bottom={cssPropBottom}>
         <Title>{title}</Title>
         <Content>{children}</Content>
 
-        <Close onClick={handleClose}>
+        <Close onClick={handleCloseLocal}>
           <IconClose />
         </Close>
       </Container>

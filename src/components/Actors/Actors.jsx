@@ -3,12 +3,12 @@ import styled from 'styled-components'
 
 import { Actor } from 'components/Actor/Actor'
 
-export const Actors = ({ actors, addActor }) => {
+export const Actors = ({ actors, onActorUpdate, onActorDelete }) => {
   return (
     <ActorsStyled>
       {actors.map((actor) => (
         <ActorsGridItemStyled key={nanoid()}>
-          <Actor {...actor} />
+          <Actor actor={actor} onActorUpdate={onActorUpdate} onActorDelete={onActorDelete} />
         </ActorsGridItemStyled>
       ))}
     </ActorsStyled>
