@@ -4,21 +4,49 @@ import styled from 'styled-components'
 import { Button } from 'components/Button/Button'
 
 export const ActorForm = (props) => {
-  const { handleSubmit } = props
+  const {
+    image: defaultImage = '',
+    name: defaultName = '',
+    occupation: defaultOccupation = '',
+    hobbies: defaultHobbies = '',
+    description: defaultDescription = '',
+    id: actorID,
+  } = props
 
-  const [name, setName] = useState(props.name || '')
-  const [occupation, setOccupation] = useState(props.occupation || '')
-  const [hobbies, setHobbies] = useState(props.hobbies || '')
-  const [description, setDescrition] = useState(props.description || '')
+  const { onSubmit: handleSubmit, onModalClose: handleModalClose } = props
 
-  const submit = (event) => {
+  const [image, setImage] = useState(defaultImage)
+  const [name, setName] = useState(defaultName)
+  const [occupation, setOccupation] = useState(defaultOccupation)
+  const [hobbies, setHobbies] = useState(defaultHobbies)
+  const [description, setDescrition] = useState(defaultDescription)
+
+  const hobbiesToArray = (hobbies) => {
+    const hobbiesIsAstring = !window.Array.isArray(hobbies)
+
+    if (hobbiesIsAstring) return hobbies ? hobbies.split(',') : ['no hobbies']
+
+    return hobbies
+  }
+
+  const handleSubmitLocal = (event) => {
     event.preventDefault()
     event.stopPropagation()
-    handleSubmit({ name, occupation, hobbies, description })
+
+    const hobbiesArray = hobbiesToArray(hobbies)
+
+    handleSubmit({ name, occupation, description, image, hobbies: hobbiesArray, id: actorID })
+    handleModalClose()
   }
 
   return (
-    <Form onSubmit={submit}>
+    <Form onSubmit={handleSubmitLocal}>
+      <Group>
+        <Label>Image {image && <img src={image} alt={name} />}</Label>
+
+        <Input type='text' value={image} onChange={(event) => setImage(event.target.value)} />
+      </Group>
+
       <Group>
         <Label>Name</Label>
         <Input type='text' value={name} onChange={(event) => setName(event.target.value)} />
@@ -35,8 +63,8 @@ export const ActorForm = (props) => {
       </Group>
 
       <Group>
-        <Label>Hobies</Label>
-        <TextArea description={description} onChange={(event) => setDescrition(event.target.value)} />
+        <Label>Description</Label>
+        <TextArea value={description} onChange={(event) => setDescrition(event.target.value)} />
       </Group>
 
       <Group>
@@ -50,6 +78,16 @@ const Form = styled.form``
 
 const Group = styled.div`
   margin-bottom: 24px;
+  position: relative;
+
+  img {
+    height: 100%;
+    width: auto;
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
 `
 
 const ButtonStyled = styled(Button)`
@@ -78,5 +116,6 @@ const TextArea = styled.textarea`
   width: 100%;
   background: #eff0f7;
   border-radius: 10px;
-  height: 150px;
+  padding: 16px;
+  height: 100px;
 `
