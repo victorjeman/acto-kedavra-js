@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import styled from 'styled-components'
 
+import { ACTOR_FORM_ADD, ACTOR_FORM_EDIT } from 'settings/settings'
 import { Button } from 'components/Button/Button'
 
 export const ActorForm = (props) => {
@@ -11,6 +12,7 @@ export const ActorForm = (props) => {
     hobbies: defaultHobbies = '',
     description: defaultDescription = '',
     id: actorID,
+    type = ACTOR_FORM_ADD,
   } = props
 
   const { onSubmit: handleSubmit, onModalClose: handleModalClose } = props
@@ -72,7 +74,10 @@ export const ActorForm = (props) => {
       </Group>
 
       <Group>
-        <ButtonStyled>Add new actor</ButtonStyled>
+        <ButtonStyled>
+          {type === ACTOR_FORM_ADD && 'Add new actor'}
+          {type === ACTOR_FORM_EDIT && 'Update the actor'}
+        </ButtonStyled>
       </Group>
     </Form>
   )

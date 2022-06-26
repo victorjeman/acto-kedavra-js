@@ -82,11 +82,13 @@ function App() {
 
       <div className='app-container'>
         <SortActors />
+
         <Actors
           actors={actors}
           onActorUpdate={handleActorUpdate}
           onActorDelete={handleActorDelete}
         />
+
         <ActorAdd onActorSubmit={handleActorSubmit} />
       </div>
 

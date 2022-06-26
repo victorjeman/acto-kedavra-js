@@ -8,7 +8,7 @@ import { Modal } from 'components/Modal/Modal'
 export const ActorAdd = ({ onActorSubmit }) => {
   const [showForm, setShowForm] = useState(false)
 
-  const handleModalClose = () => window.setShowForm(false)
+  const handleModalClose = () => setShowForm(false)
 
   return (
     <ActorAddStyled>

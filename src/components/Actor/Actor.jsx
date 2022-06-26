@@ -1,6 +1,8 @@
 import styled from 'styled-components'
 import { useState } from 'react'
 
+import { ACTOR_FORM_EDIT } from 'settings/settings'
+
 import { ActorForm } from 'components/ActorForm/ActorForm'
 import { ActorReadMore } from 'components/ActorReadMore/ActorReadMore'
 import { Button } from 'components/Button/Button'
@@ -9,7 +11,11 @@ import { Modal } from 'components/Modal/Modal'
 
 import { ReactComponent as IconClose } from 'assets/images/close.svg'
 
-export const Actor = ({ actor, onActorUpdate: handleActorUpdate, onActorDelete: handleActorDelete }) => {
+export const Actor = ({
+  actor,
+  onActorUpdate: handleActorUpdate,
+  onActorDelete: handleActorDelete,
+}) => {
   const { image, name, occupation, hobbies, description } = actor
 
   const [showEditModal, setShowEditModal] = useState(false)
@@ -42,7 +48,12 @@ export const Actor = ({ actor, onActorUpdate: handleActorUpdate, onActorDelete: 
 
         {showEditModal && (
           <Modal onClose={handleModalClose}>
-            <ActorForm {...actor} onSubmit={handleActorUpdate} onModalClose={handleModalClose} />
+            <ActorForm
+              {...actor}
+              onSubmit={handleActorUpdate}
+              onModalClose={handleModalClose}
+              type={ACTOR_FORM_EDIT}
+            />
           </Modal>
         )}
       </ContentStyled>
