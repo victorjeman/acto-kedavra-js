@@ -54,7 +54,11 @@ export const ActorForm = (props) => {
 
       <Group>
         <Label>Occupation besides acting</Label>
-        <Input type='text' value={occupation} onChange={(event) => setOccupation(event.target.value)} />
+        <Input
+          type='text'
+          value={occupation}
+          onChange={(event) => setOccupation(event.target.value)}
+        />
       </Group>
 
       <Group>
