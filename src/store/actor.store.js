@@ -68,12 +68,12 @@ export class ActorStore {
   }
 
   updateActor = (actor) => {
-    const actorIndexToUpdate = getActorIndexById(this.actors, actor)
-    this.actors[actorIndexToUpdate] = actor
+    const actorToUpdateIndex = getActorIndexById(this.actors, actor)
+    this.actors[actorToUpdateIndex] = actor
   }
 
   deleteActor = (actor) => {
-    const actorIndexToDelete = getActorIndexById(this.actors, actor)
-    this.actors.splice(actorIndexToDelete, 1)
+    const actorToDeleteIndex = getActorIndexById(this.actors, actor)
+    this.actors.splice(actorToDeleteIndex, 1)
   }
 }
