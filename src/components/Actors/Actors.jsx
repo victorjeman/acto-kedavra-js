@@ -1,4 +1,3 @@
-import { nanoid } from 'nanoid'
 import { observer } from 'mobx-react-lite'
 import styled from 'styled-components'
 
@@ -12,8 +11,8 @@ export const Actors = observer(() => {
 
   return (
     <ActorsStyled>
-      {actors.map((actor) => (
-        <ActorsGridItemStyled key={nanoid()}>
+      {actors.map((actor, index) => (
+        <ActorsGridItemStyled key={actor.id}>
           <Actor actor={actor} />
         </ActorsGridItemStyled>
       ))}

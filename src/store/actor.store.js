@@ -1,34 +1,7 @@
 import { makeAutoObservable } from 'mobx'
 
+import { ActorService } from 'services/Actor/Actor.service'
 import { API } from 'api/API'
-
-// UTILS
-const getActorIndexById = (actors, actorToSearch) => {
-  const checkActorId = (actor) => actor.id === actorToSearch.id
-  const actorIndex = actors.findIndex(checkActorId)
-
-  return actorIndex
-}
-
-const checkActorUpdatedSuccesfully = (actor) => actor?.id
-
-const getActorsAfterUpdate = (actors, actorUpdated) => {
-  const actorUpdatedIndex = getActorIndexById(actors, actorUpdated)
-  const actorsLocal = [...actors]
-
-  actorsLocal[actorUpdatedIndex] = actorUpdated
-
-  return actorsLocal
-}
-
-const getActorsAfterDelete = (actors, actorUpdated) => {
-  const actorUpdatedIndex = getActorIndexById(actors, actorUpdated)
-  const actorsLocal = [...actors]
-
-  actorsLocal.splice(actorUpdatedIndex, 1)
-
-  return actorsLocal
-}
 
 export class ActorStore {
   actors = []
@@ -44,31 +17,34 @@ export class ActorStore {
 
   handleActorSubmit = async (actor) => {
     const actorNew = await API.postActor(actor)
-
-    if (checkActorUpdatedSuccesfully(actorNew)) {
-      this.setActors([...this.actors, actorNew])
-    }
+    if (actorNew) this.addActor(actorNew)
   }
 
   handleActorUpdate = async (actor) => {
     const actorUpdated = await API.updateActor(actor)
-
-    if (checkActorUpdatedSuccesfully(actorUpdated)) {
-      const actorsUpdated = getActorsAfterUpdate(this.actors, actorUpdated)
-      this.setActors(actorsUpdated)
-    }
+    if (actorUpdated) this.updateActor(actor)
   }
 
   handleActorDelete = async (actor) => {
     const actorDeleted = await API.deleteActor(actor)
-
-    if (checkActorUpdatedSuccesfully(actorDeleted)) {
-      const actorsUpdated = getActorsAfterDelete(this.actors, actorDeleted)
-      this.setActors(actorsUpdated)
-    }
+    if (actorDeleted) this.deleteActor(actorDeleted)
   }
 
   setActors = (actors) => {
     this.actors = actors
+  }
+
+  addActor = (actor) => {
+    this.actors.push(actor)
+  }
+
+  updateActor = (actor) => {
+    const actorToUpdateIndex = ActorService.getActorIndexById(this.actors, actor)
+    this.actors[actorToUpdateIndex] = actor
+  }
+
+  deleteActor = (actor) => {
+    const actorToDeleteIndex = ActorService.getActorIndexById(this.actors, actor)
+    this.actors.splice(actorToDeleteIndex, 1)
   }
 }
