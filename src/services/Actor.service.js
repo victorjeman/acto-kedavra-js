@@ -30,4 +30,5 @@ export const ActorService = {
   checkActorUpdatedSuccesfully,
   getActorsAfterUpdate,
   getActorsAfterDelete,
+  getActorIndexById,
 }

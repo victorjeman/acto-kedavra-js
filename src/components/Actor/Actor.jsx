@@ -1,7 +1,9 @@
-import styled from 'styled-components'
 import { useState } from 'react'
+import styled from 'styled-components'
 
 import { ACTOR_FORM_EDIT } from 'settings/settings'
+
+import { useStore } from 'store/root.store'
 
 import { ActorForm } from 'components/ActorForm/ActorForm'
 import { ActorReadMore } from 'components/ActorReadMore/ActorReadMore'
@@ -11,19 +13,17 @@ import { Modal } from 'components/Modal/Modal'
 
 import { ReactComponent as IconClose } from 'assets/images/close.svg'
 
-export const Actor = ({
-  actor,
-  onActorUpdate: handleActorUpdate,
-  onActorDelete: handleActorDelete,
-}) => {
-  const { image, name, occupation, hobbies, description } = actor
+export const Actor = ({ id, image, name, occupation, hobbies, description }) => {
+  const { actorStore } = useStore()
+  const { handleActorUpdate, handleActorDelete } = actorStore
 
   const [showEditModal, setShowEditModal] = useState(false)
 
   const handleModalShow = () => setShowEditModal(true)
   const handleModalClose = () => setShowEditModal(false)
 
-  const handleActorDeleteLocal = () => handleActorDelete(actor)
+  const handleActorDeleteLocal = () =>
+    handleActorDelete({ id, image, name, occupation, hobbies, description })
 
   return (
     <ActorStyled>
@@ -49,10 +49,15 @@ export const Actor = ({
         {showEditModal && (
           <Modal onClose={handleModalClose}>
             <ActorForm
-              {...actor}
+              id={id}
+              image={image}
+              name={name}
+              occupation={occupation}
+              hobbies={hobbies}
+              description={description}
+              type={ACTOR_FORM_EDIT}
               onSubmit={handleActorUpdate}
               onModalClose={handleModalClose}
-              type={ACTOR_FORM_EDIT}
             />
           </Modal>
         )}

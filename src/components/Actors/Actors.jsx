@@ -1,24 +1,24 @@
-import { nanoid } from 'nanoid'
-import styled from 'styled-components'
 import { observer } from 'mobx-react-lite'
+import { toJS } from 'mobx'
+import { useEffect } from 'react'
+import styled from 'styled-components'
 
-import { store } from 'store'
-
+import { useStore } from 'store/root.store'
 import { Actor } from 'components/Actor/Actor'
 
 export const Actors = observer(() => {
-  const { actorStore } = store
-  const { actors, handleActorUpdate, handleActorDelete } = actorStore
+  const { actorStore } = useStore()
+  const { fetchActors, actors } = actorStore
+
+  useEffect(() => {
+    fetchActors()
+  }, [fetchActors])
 
   return (
     <ActorsStyled>
       {actors.map((actor) => (
-        <ActorsGridItemStyled key={nanoid()}>
-          <Actor
-            actor={actor}
-            onActorUpdate={handleActorUpdate}
-            onActorDelete={handleActorDelete}
-          />
+        <ActorsGridItemStyled key={actor.id}>
+          <Actor {...toJS(actor)} />
         </ActorsGridItemStyled>
       ))}
     </ActorsStyled>

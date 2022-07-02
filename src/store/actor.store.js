@@ -6,6 +6,14 @@ import { ActorService } from 'services/Actor.service'
 export class ActorStore {
   actors = []
 
+  get actorNames() {
+    return this.actors.map((actor) => actor.name)
+  }
+
+  get actorHobbies() {
+    return this.actors.map((actor) => actor.hobbies)
+  }
+
   constructor() {
     makeAutoObservable(this)
   }
@@ -19,7 +27,9 @@ export class ActorStore {
     const actorNew = await API.postActor(actor)
 
     if (ActorService.checkActorUpdatedSuccesfully(actorNew, this.actors)) {
-      this.setActors([...this.actors, actorNew])
+      this.addActor(actor)
+
+      // this.setActors([...this.actors, actorNew])
     }
   }
 
@@ -27,8 +37,10 @@ export class ActorStore {
     const actorUpdated = await API.updateActor(actor)
 
     if (ActorService.checkActorUpdatedSuccesfully(actorUpdated, this.actors)) {
-      const actorsUpdated = ActorService.getActorsAfterUpdate(actorUpdated, this.actors)
-      this.setActors(actorsUpdated)
+      this.updateActor(actorUpdated)
+
+      // const actorsUpdated = ActorService.getActorsAfterUpdate(actorUpdated, this.actors)
+      // this.setActors(actorsUpdated)
     }
   }
 
@@ -36,12 +48,28 @@ export class ActorStore {
     const actorDeleted = await API.deleteActor(actor)
 
     if (ActorService.checkActorUpdatedSuccesfully(actorDeleted, this.actors)) {
-      const actorsUpdated = ActorService.getActorsAfterDelete(actorDeleted, this.actors)
-      this.setActors(actorsUpdated)
+      this.deleteActor(actorDeleted)
+
+      // const actorsUpdated = ActorService.getActorsAfterDelete(actorDeleted, this.actors)
+      // this.setActors(actorsUpdated)
     }
   }
 
   setActors = (actors) => {
     this.actors = actors
+  }
+
+  addActor = (actor) => {
+    this.actors.push(actor)
+  }
+
+  deleteActor = (actor) => {
+    const actorToDeleteIndex = ActorService.getActorIndexById(this.actors, actor)
+    this.actors.splice(actorToDeleteIndex, 1)
+  }
+
+  updateActor = (actor) => {
+    const actorToUpdateIndex = ActorService.getActorIndexById(this.actors, actor)
+    this.actors[actorToUpdateIndex] = actor
   }
 }

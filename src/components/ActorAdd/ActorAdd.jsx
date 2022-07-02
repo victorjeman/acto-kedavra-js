@@ -1,11 +1,16 @@
+import { observer } from 'mobx-react-lite'
 import { useState } from 'react'
 import styled from 'styled-components'
 
 import { ActorForm } from 'components/ActorForm/ActorForm'
 import { Button } from 'components/Button/Button'
 import { Modal } from 'components/Modal/Modal'
+import { useStore } from 'store/root.store'
 
-export const ActorAdd = ({ onActorSubmit }) => {
+export const ActorAdd = observer(() => {
+  const { actorStore } = useStore()
+  const { handleActorSubmit } = actorStore
+
   const [showForm, setShowForm] = useState(false)
 
   const handleModalClose = () => setShowForm(false)
@@ -18,12 +23,12 @@ export const ActorAdd = ({ onActorSubmit }) => {
 
       {showForm && (
         <Modal title='Add new actor' onClose={handleModalClose}>
-          <ActorForm onSubmit={onActorSubmit} onModalClose={handleModalClose} />
+          <ActorForm onSubmit={handleActorSubmit} onModalClose={handleModalClose} />
         </Modal>
       )}
     </ActorAddStyled>
   )
-}
+})
 
 const ActorAddStyled = styled.div`
   margin-right: auto;
