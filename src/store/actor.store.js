@@ -2,7 +2,6 @@ import { makeAutoObservable } from 'mobx'
 
 import { API } from 'api/API'
 
-// UTILS
 const getActorIndexById = (actors, actorToSearch) => {
   const checkActorId = (actor) => actor.id === actorToSearch.id
   const actorIndex = actors.findIndex(checkActorId)
@@ -45,30 +44,36 @@ export class ActorStore {
   handleActorSubmit = async (actor) => {
     const actorNew = await API.postActor(actor)
 
-    if (checkActorUpdatedSuccesfully(actorNew)) {
-      this.setActors([...this.actors, actorNew])
-    }
+    if (actorNew) this.addActor(actor)
   }
 
   handleActorUpdate = async (actor) => {
     const actorUpdated = await API.updateActor(actor)
 
-    if (checkActorUpdatedSuccesfully(actorUpdated)) {
-      const actorsUpdated = getActorsAfterUpdate(this.actors, actorUpdated)
-      this.setActors(actorsUpdated)
-    }
+    if (actorUpdated) this.updateActor(actorUpdated)
   }
 
   handleActorDelete = async (actor) => {
     const actorDeleted = await API.deleteActor(actor)
 
-    if (checkActorUpdatedSuccesfully(actorDeleted)) {
-      const actorsUpdated = getActorsAfterDelete(this.actors, actorDeleted)
-      this.setActors(actorsUpdated)
-    }
+    if (actorDeleted) this.deleteActor(actor)
   }
 
   setActors = (actors) => {
     this.actors = actors
+  }
+
+  addActor = (actor) => {
+    this.actors.push(actor)
+  }
+
+  updateActor = (actor) => {
+    const actorIndexToUpdate = getActorIndexById(this.actors, actor)
+    this.actors[actorIndexToUpdate] = actor
+  }
+
+  deleteActor = (actor) => {
+    const actorIndexToDelete = getActorIndexById(this.actors, actor)
+    this.actors.splice(actorIndexToDelete, 1)
   }
 }
