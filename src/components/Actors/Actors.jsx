@@ -1,19 +1,25 @@
 import { nanoid } from 'nanoid'
+import { observer } from 'mobx-react-lite'
 import styled from 'styled-components'
+
+import { useStore } from 'store/root.store'
 
 import { Actor } from 'components/Actor/Actor'
 
-export const Actors = ({ actors, onActorUpdate, onActorDelete }) => {
+export const Actors = observer(() => {
+  const { actorStore } = useStore()
+  const { actors } = actorStore
+
   return (
     <ActorsStyled>
       {actors.map((actor) => (
         <ActorsGridItemStyled key={nanoid()}>
-          <Actor actor={actor} onActorUpdate={onActorUpdate} onActorDelete={onActorDelete} />
+          <Actor actor={actor} />
         </ActorsGridItemStyled>
       ))}
     </ActorsStyled>
   )
-}
+})
 
 const ActorsStyled = styled.div`
   display: flex;

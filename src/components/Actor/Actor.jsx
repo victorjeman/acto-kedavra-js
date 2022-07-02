@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import { useState } from 'react'
 
 import { ACTOR_FORM_EDIT } from 'settings/settings'
+import { useStore } from 'store/root.store'
 
 import { ActorForm } from 'components/ActorForm/ActorForm'
 import { ActorReadMore } from 'components/ActorReadMore/ActorReadMore'
@@ -11,11 +12,11 @@ import { Modal } from 'components/Modal/Modal'
 
 import { ReactComponent as IconClose } from 'assets/images/close.svg'
 
-export const Actor = ({
-  actor,
-  onActorUpdate: handleActorUpdate,
-  onActorDelete: handleActorDelete,
-}) => {
+export const Actor = ({ actor }) => {
+  const { actorStore } = useStore()
+
+  const { handleActorUpdate, handleActorDelete } = actorStore
+
   const { image, name, occupation, hobbies, description } = actor
 
   const [showEditModal, setShowEditModal] = useState(false)
