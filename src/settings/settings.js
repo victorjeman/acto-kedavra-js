@@ -10,7 +10,7 @@ export const ACTOR_FORM_ADD = 'ADD'
 export const ACTOR_FORM_EDIT = 'EDIT'
 
 const SIZE = {
-  MEDIUM: 768,
+  MEDIUM: 700,
   LARGE: 1024,
 }
 

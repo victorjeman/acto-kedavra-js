@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { useState } from 'react'
 
-import { ACTOR_FORM_EDIT } from 'settings/settings'
+import { ACTOR_FORM_EDIT, MEDIA_SIZE } from 'settings/settings'
 import { useStore } from 'store/root.store'
 
 import { ActorForm } from 'components/ActorForm/ActorForm'
@@ -70,12 +70,23 @@ export const ActorStyled = styled.div`
 `
 
 const ImageStyled = styled.img`
-  height: 173px;
   object-fit: cover;
   width: 100%;
   display: block;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
+
+  @media ${MEDIA_SIZE.SMALL} {
+    height: 173px;
+  }
+
+  @media ${MEDIA_SIZE.MEDIUM} {
+    height: 300px;
+  }
+
+  @media ${MEDIA_SIZE.LARGE} {
+    height: 370px;
+  }
 `
 
 const ContentStyled = styled.div`
