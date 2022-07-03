@@ -74,6 +74,8 @@ const ImageStyled = styled.img`
   object-fit: cover;
   width: 100%;
   display: block;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 `
 
 const ContentStyled = styled.div`
@@ -82,10 +84,10 @@ const ContentStyled = styled.div`
 
 const NameStyled = styled.h3`
   color: #14142b;
-  font-size: 13px;
   font-weight: 600;
   line-height: 1.2;
   margin-bottom: 4px;
+  font-size: 13px;
 `
 
 const OcupationStyled = styled.p`

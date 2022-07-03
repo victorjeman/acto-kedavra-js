@@ -12,4 +12,8 @@ export const HobbyStyled = styled.span`
   color: #032596;
   font-size: 9px;
   display: inline-block;
+  white-space: nowrap;
+  text-align: center;
+  text-overflow: ellipsis;
+  overflow: hidden;
 `

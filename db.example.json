@@ -5,7 +5,7 @@
       "name": "Leondardo Dicaprio",
       "occupation": "Doing things",
       "likes": 35,
-      "hobbies": ["coding", "gym", "reading", "doing nothing"],
+      "hobbies": ["Riding Bicycle", "Scuba Diving,", "Video Games"],
       "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ullam iste excepturi harum reiciendis natus repellendus nostrum at amet, nobis id sint minima voluptas omnis dicta illo architecto! Ipsa, minima molestias!",
       "id": 1
     },
@@ -14,7 +14,7 @@
       "name": "Angelia Jolie",
       "occupation": "Doing things",
       "likes": 35,
-      "hobbies": ["coding", "gym", "reading", "doing nothing"],
+      "hobbies": ["Dancing", "Traveling", "Modeling"],
       "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ullam iste excepturi harum reiciendis natus repellendus nostrum at amet, nobis id sint minima voluptas omnis dicta illo architecto! Ipsa, minima molestias!",
       "id": 2
     },
@@ -23,7 +23,7 @@
       "name": "Jennifer Aniston",
       "occupation": "Doing things",
       "likes": 35,
-      "hobbies": ["coding", "gym", "reading", "doing nothing"],
+      "hobbies": ["Traveling", "Dogs", "Art"],
       "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ullam iste excepturi harum reiciendis natus repellendus nostrum at amet, nobis id sint minima voluptas omnis dicta illo architecto! Ipsa, minima molestias!",
       "id": 3
     },
@@ -32,9 +32,36 @@
       "name": "Dwayne Johnson",
       "occupation": "Doing things",
       "likes": 35,
-      "hobbies": ["coding", "gym", "reading", "doing nothing"],
+      "hobbies": ["Gym Freak", "Wrestling", "Music"],
       "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ullam iste excepturi harum reiciendis natus repellendus nostrum at amet, nobis id sint minima voluptas omnis dicta illo architecto! Ipsa, minima molestias!",
       "id": 4
+    },
+    {
+      "image": "/images/actors/5.png",
+      "name": "Brad Pitt",
+      "occupation": "Actor & Producer",
+      "likes": 10,
+      "hobbies": ["Swimming", "Golf", "Sculpture"],
+      "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ullam iste excepturi harum reiciendis natus repellendus nostrum at amet, nobis id sint minima voluptas omnis dicta illo architecto! Ipsa, minima molestias!",
+      "id": 5
+    },
+    {
+      "image": "/images/actors/6.png",
+      "name": "Zendaya",
+      "occupation": "Actress & Director",
+      "likes": 10,
+      "hobbies": ["Dancing", "Singing", "Fashion"],
+      "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ullam iste excepturi harum reiciendis natus repellendus nostrum at amet, nobis id sint minima voluptas omnis dicta illo architecto! Ipsa, minima molestias!",
+      "id": 6
+    },
+    {
+      "image": "/images/actors/7.png",
+      "name": "Morgan Freeman",
+      "occupation": "Actor & Producer",
+      "likes": 10,
+      "hobbies": ["Sailling", "Beekeeping", "Being God"],
+      "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ullam iste excepturi harum reiciendis natus repellendus nostrum at amet, nobis id sint minima voluptas omnis dicta illo architecto! Ipsa, minima molestias!",
+      "id": 7
     }
   ]
 }
