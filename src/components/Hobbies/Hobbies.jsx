@@ -20,7 +20,10 @@ export const Hobbies = ({ hobbies, ...rest }) => {
 const HobbiesStyled = styled.ul`
   list-style: none;
   padding: 0;
-  margin: 0;
+  margin: 12px 0;
+  display: flex;
+  flex-wrap: none;
+  overflow: hidden;
 `
 
 const HobbiesItemStyled = styled.li`

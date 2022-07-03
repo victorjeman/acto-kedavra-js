@@ -8,3 +8,14 @@ export const ROUTES = {
 
 export const ACTOR_FORM_ADD = 'ADD'
 export const ACTOR_FORM_EDIT = 'EDIT'
+
+const SIZE = {
+  MEDIUM: 700,
+  LARGE: 1024,
+}
+
+export const MEDIA_SIZE = {
+  SMALL: `only screen and (max-width: ${SIZE.MEDIUM - 1}px)`,
+  MEDIUM: `only screen and (min-width: ${SIZE.MEDIUM}px) and (max-width: ${SIZE.LARGE - 1}px)`,
+  LARGE: `only screen and (min-width: ${SIZE.LARGE}px)`,
+}
